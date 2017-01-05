@@ -38,3 +38,10 @@ captures/
 
 # Keystore files
 *.jks
+
+# idea project files
+.idea/
+.idea/.name
+*.iml
+*.ipr
+*.iws
