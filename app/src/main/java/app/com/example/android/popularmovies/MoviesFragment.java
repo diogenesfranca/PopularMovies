@@ -1,4 +1,4 @@
-package layout;
+package app.com.example.android.popularmovies;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,8 +10,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
-
-import app.com.example.android.popularmovies.R;
 
 public class MoviesFragment extends Fragment {
 
