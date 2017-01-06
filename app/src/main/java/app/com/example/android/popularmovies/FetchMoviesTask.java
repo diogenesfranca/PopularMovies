@@ -137,10 +137,10 @@ public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
 
             String id, title, overview, posterPath;
 
-            id = moviesJson.getString(Movie.ID_PROPERTY);
-            title = moviesJson.getString(Movie.TITLE_PROPERTY);
-            overview = moviesJson.getString(Movie.OVERVIEW_PROPERTY);
-            posterPath = moviesJson.getString(Movie.POSTER_PATH_PROPERTY);
+            id = movieJson.getString(Movie.ID_PROPERTY);
+            title = movieJson.getString(Movie.TITLE_PROPERTY);
+            overview = movieJson.getString(Movie.OVERVIEW_PROPERTY);
+            posterPath = movieJson.getString(Movie.POSTER_PATH_PROPERTY);
 
             Movie movie  = new Movie(id, title, overview, posterPath);
             movies.add(movie);
