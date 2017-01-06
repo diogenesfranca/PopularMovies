@@ -87,6 +87,7 @@ public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
                 //Stream was empty. Don't need to parse
                 return null;
             }
+            moviesJsonString = stringBuffer.toString();
         } catch (IOException e){
             Log.e(LOG_TAG,"Error", e);
             return null;
