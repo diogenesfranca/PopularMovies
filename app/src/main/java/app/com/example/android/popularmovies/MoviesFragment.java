@@ -30,7 +30,7 @@ public class MoviesFragment extends Fragment {
 
         GridView moviesGridView = (GridView) rootView.findViewById(R.id.gridview_movies);
         moviesGridView.setAdapter(movieAdapter);
-        
+
         return rootView;
     }
 }
