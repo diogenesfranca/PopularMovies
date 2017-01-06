@@ -4,12 +4,17 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
@@ -99,6 +104,13 @@ public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
                 }
             }
         }
+        try{
+            return getMoviesFromJson(moviesJsonString);
+        }
+        catch (JSONException e){
+            Log.e(LOG_TAG, e.getMessage(), e);
+            e.printStackTrace();
+        }
 
         return null;
     }
@@ -112,5 +124,26 @@ public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
                 movieAdapter.add(movie);
             }
         }
+    }
+
+    private List<Movie> getMoviesFromJson(String moviesJsonString) throws JSONException{
+        JSONObject moviesJson = new JSONObject(moviesJsonString);
+        JSONArray moviesArray = moviesJson.getJSONArray(Movie.RESULTS_PROPERTY);
+
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        for (int i = 0; i< moviesArray.length(); i++){
+            JSONObject movieJson = moviesArray.getJSONObject(i);
+
+            String id, title, overview, posterPath;
+
+            id = moviesJson.getString(Movie.ID_PROPERTY);
+            title = moviesJson.getString(Movie.TITLE_PROPERTY);
+            overview = moviesJson.getString(Movie.OVERVIEW_PROPERTY);
+            posterPath = moviesJson.getString(Movie.POSTER_PATH_PROPERTY);
+
+            Movie movie  = new Movie(id, title, overview, posterPath);
+            movies.add(movie);
+        }
+        return movies;
     }
 }
