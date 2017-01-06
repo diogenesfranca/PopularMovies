@@ -20,6 +20,7 @@ public class MoviesFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,5 +33,16 @@ public class MoviesFragment extends Fragment {
         moviesGridView.setAdapter(movieAdapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getMovies();
+    }
+
+    private void getMovies(){
+        FetchMoviesTask moviesTask = new FetchMoviesTask(movieAdapter);
+        moviesTask.execute(true);
     }
 }
