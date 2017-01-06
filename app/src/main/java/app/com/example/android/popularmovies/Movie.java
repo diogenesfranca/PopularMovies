@@ -12,4 +12,20 @@ public class Movie {
         this. overview = overview;
         this.posterPath = posterPath;
     }
+
+    public String getId(){
+        return id;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getOverview (){
+        return overview;
+    }
+
+    public String getPosterPath(){
+        return posterPath;
+    }
 }
