@@ -1,6 +1,8 @@
 package app.com.example.android.popularmovies;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +44,11 @@ public class MoviesFragment extends Fragment {
     }
 
     private void getMovies(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String searchPreference = preferences.getString(getString(R.string.preferences_search_type_key),
+                getString(R.string.preferences_search_type_value_popular_movies));
         FetchMoviesTask moviesTask = new FetchMoviesTask(movieAdapter);
-        moviesTask.execute(true);
+        boolean popularMoviesPreference = searchPreference.equals(getString(R.string.preferences_search_type_value_popular_movies));
+        moviesTask.execute(popularMoviesPreference);
     }
 }
