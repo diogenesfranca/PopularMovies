@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="preferences_search_type_entries">
+        <item>@string/preferences_search_type_entry_popular_movies</item>
+        <item>@string/preferences_search_type_entry_top_rated_movies</item>
+    </string-array>
+
+    <string-array name="preferences_search_type_values">
+        <item>@string/preferences_search_type_value_popular_movies</item>
+        <item>@string/preferences_search_type_value_top_rated_movies</item>
+    </string-array>
+</resources>
