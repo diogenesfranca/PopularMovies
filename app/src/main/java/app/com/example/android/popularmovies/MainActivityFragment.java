@@ -11,10 +11,10 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 
-public class MoviesFragment extends Fragment {
+public class MainActivityFragment extends Fragment {
 
     MovieAdapter movieAdapter;
-    public MoviesFragment() {
+    public MainActivityFragment() {
     }
 
     @Override
@@ -27,7 +27,7 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         movieAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
 
