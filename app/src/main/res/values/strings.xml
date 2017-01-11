@@ -9,7 +9,6 @@
     <string name="preferences_search_type_value_popular_movies">popular_movies</string>
     <string name="preferences_search_type_value_top_rated_movies">top_rated_movies</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_details">Detalhes</string>
+    <string name="title_activity_settings">Configurações</string>
 </resources>

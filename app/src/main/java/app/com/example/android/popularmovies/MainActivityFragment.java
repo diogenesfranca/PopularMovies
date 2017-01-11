@@ -1,5 +1,6 @@
 package app.com.example.android.popularmovies;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -31,8 +33,18 @@ public class MainActivityFragment extends Fragment {
 
         movieAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
 
-        GridView moviesGridView = (GridView) rootView.findViewById(R.id.gridview_movies);
+        GridView moviesGridView = (GridView) rootView.findViewById(R.id.gridview_main_fragment);
         moviesGridView.setAdapter(movieAdapter);
+
+        moviesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String movieId = movieAdapter.getItem(i).getId();
+                Intent detailsIntent = new Intent(getActivity(), DetailsActivity.class);
+                detailsIntent.putExtra(Intent.EXTRA_TEXT, movieId);
+                startActivity(detailsIntent);
+            }
+        });
 
         return rootView;
     }
