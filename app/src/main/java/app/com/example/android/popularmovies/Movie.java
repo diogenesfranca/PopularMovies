@@ -22,6 +22,8 @@ public class Movie {
         this.title = title;
         this.originalTitle = originalTitle;
         this.overview = overview;
+        this.voteAverage = voteAverage;
+        this.releaseDate = releaseDate;
         this.posterPath = posterPath;
     }
 

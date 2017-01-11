@@ -1,10 +1,14 @@
 package app.com.example.android.popularmovies;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,10 +23,12 @@ import java.net.URL;
 public class FetchMovieTask extends AsyncTask<String, Void, Movie> {
 
     private View rootView;
+    private Context context;
     private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
 
-    public FetchMovieTask(View rootView) {
+    public FetchMovieTask(View rootView, Context context) {
         this.rootView = rootView;
+        this.context = context;
     }
 
     @Override
@@ -98,6 +104,14 @@ public class FetchMovieTask extends AsyncTask<String, Void, Movie> {
     protected void onPostExecute(Movie movie) {
         ((TextView) rootView.findViewById(R.id.textview_original_title_details_fragment))
                 .setText(movie.getOriginalTitle());
+        ImageView poster = (ImageView) rootView.findViewById(R.id.imageview_poster_details_fragment);
+        Picasso.with(context).load("http://image.tmdb.org/t/p/w185/" + movie.getPosterPath()).into(poster);
+        ((TextView) rootView.findViewById(R.id.textview_release_date_details_fragment))
+                .setText(movie.getReleaseDate());
+        ((TextView) rootView.findViewById(R.id.textview_vote_average_details_fragment))
+                .setText(movie.getVoteAverage() + "/10");
+        ((TextView) rootView.findViewById(R.id.textview_overview_details_fragment))
+                .setText(movie.getOverview());
     }
 
     private Movie getMovieFromJson(String moviesJsonString) throws JSONException {

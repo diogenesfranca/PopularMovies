@@ -26,7 +26,7 @@ public class DetailsActivityFragment extends Fragment {
     }
 
     private void getMovie(String movieId, View rootView){
-        FetchMovieTask movieTask = new FetchMovieTask(rootView);
+        FetchMovieTask movieTask = new FetchMovieTask(rootView, getActivity());
         movieTask.execute(movieId);
     }
 }
