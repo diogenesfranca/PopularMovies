@@ -10,9 +10,10 @@
         android:id="@+id/gridview_main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
+        android:numColumns="auto_fit"
         android:verticalSpacing="0dp"
         android:horizontalSpacing="0dp"
+        android:columnWidth="180dp"
         android:stretchMode="columnWidth">
     </GridView>
 </FrameLayout>

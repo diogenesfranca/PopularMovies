@@ -46,6 +46,7 @@ public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
 
             Uri uri = null;
 
+            //Put the API in the gradle global properties in the user's home directory under the .gradle folder and the gradle.properties file, if the file doesn't exist, then create it.
             if(popularMovies){
                 uri = Uri.parse(MOVIES_API_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_BY_PARAM, "popularity.desc")

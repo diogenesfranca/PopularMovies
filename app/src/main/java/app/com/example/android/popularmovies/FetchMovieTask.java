@@ -106,9 +106,11 @@ public class FetchMovieTask extends AsyncTask<String, Void, Movie> {
                 .setText(movie.getOriginalTitle());
         ImageView poster = (ImageView) rootView.findViewById(R.id.imageview_poster_details_fragment);
         Picasso.with(context).load("http://image.tmdb.org/t/p/w185/" + movie.getPosterPath()).into(poster);
-        ((TextView) rootView.findViewById(R.id.textview_release_date_details_fragment))
-                .setText(movie.getReleaseDate());
-        ((TextView) rootView.findViewById(R.id.textview_vote_average_details_fragment))
+
+        View linearLayout = rootView.findViewById(R.id.linearlayout_right_info_details_fragment);
+        ((TextView) linearLayout.findViewById(R.id.textview_release_date_details_fragment))
+                .setText(movie.getReleaseYear());
+        ((TextView) linearLayout.findViewById(R.id.textview_vote_average_details_fragment))
                 .setText(movie.getVoteAverage() + "/10");
         ((TextView) rootView.findViewById(R.id.textview_overview_details_fragment))
                 .setText(movie.getOverview());

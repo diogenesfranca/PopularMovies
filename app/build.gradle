@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //Put the API in the gradle global properties in the user's home directory under the .gradle folder and the gradle.properties file, if the file doesn't exist, then create it.
     buildTypes.each {
         it.buildConfigField 'String', 'THE_MOVIE_DB_API_KEY', TheMovieDBApiKey
     }

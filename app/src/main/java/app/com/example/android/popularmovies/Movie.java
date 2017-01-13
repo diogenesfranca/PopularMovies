@@ -39,5 +39,13 @@ public class Movie {
 
     public String getReleaseDate (){ return releaseDate; }
 
+    public String getReleaseYear (){
+        String[] dateParts = releaseDate.split("-");
+        if(dateParts != null && dateParts.length > 0){
+            return dateParts[0];
+        }
+        return "";
+    }
+
     public String getPosterPath(){ return posterPath; }
 }
