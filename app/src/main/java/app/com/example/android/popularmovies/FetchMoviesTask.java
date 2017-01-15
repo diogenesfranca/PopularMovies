@@ -38,26 +38,21 @@ public class FetchMoviesTask extends AsyncTask<Boolean, Void, List<Movie>> {
 
 
         try {
-            final String MOVIES_API_BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
-            final String SORT_BY_PARAM = "sort_by";
-            final String CERTIFICATION_COUNTRY_PARAM = "certification_country";
-            final String CERTIFICATION_PARAM = "certification";
+            String moviesApiBaseUrl = "http://api.themoviedb.org/3/movie/";
             final String APY_KEY_PARAM = "api_key";
 
             Uri uri = null;
 
             //Put the API in the gradle global properties in the user's home directory under the .gradle folder and the gradle.properties file, if the file doesn't exist, then create it.
             if(popularMovies){
-                uri = Uri.parse(MOVIES_API_BASE_URL).buildUpon()
-                        .appendQueryParameter(SORT_BY_PARAM, "popularity.desc")
+                moviesApiBaseUrl += "popular";
+                uri = Uri.parse(moviesApiBaseUrl).buildUpon()
                         .appendQueryParameter(APY_KEY_PARAM, BuildConfig.THE_MOVIE_DB_API_KEY)
                         .build();
             }
             else{
-                uri = Uri.parse(MOVIES_API_BASE_URL).buildUpon()
-                        .appendQueryParameter(CERTIFICATION_COUNTRY_PARAM, "US")
-                        .appendQueryParameter(CERTIFICATION_PARAM, "R")
-                        .appendQueryParameter(SORT_BY_PARAM, "vote_average.desc")
+                moviesApiBaseUrl += "top_rated";
+                uri = Uri.parse(moviesApiBaseUrl).buildUpon()
                         .appendQueryParameter(APY_KEY_PARAM, BuildConfig.THE_MOVIE_DB_API_KEY)
                         .build();
             }
