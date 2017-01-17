@@ -1,14 +1,6 @@
 package app.com.example.android.popularmovies;
 
 public class Movie {
-    public final static String RESULTS_PROPERTY = "results";
-    public final static String ID_PROPERTY = "id";
-    public final static String TITLE_PROPERTY = "title";
-    public final static String ORIGINAL_TITLE_PROPERTY = "original_title";
-    public final static String OVERVIEW_PROPERTY = "overview";
-    public final static String VOTE_AVERAGE_PROPERTY = "vote_average";
-    public final static String RELEASE_DATE_PROPERTY = "release_date";
-    public final static String POSTER_PATH_PROPERTY = "poster_path";
     private String id;
     private String title;
     private String originalTitle;

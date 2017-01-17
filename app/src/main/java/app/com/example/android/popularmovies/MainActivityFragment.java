@@ -5,17 +5,30 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
+
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
-public class MainActivityFragment extends Fragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class MainActivityFragment extends Fragment implements Callback<MoviesSerializer> {
 
     MovieAdapter movieAdapter;
+    private final String LOG_TAG = MainActivityFragment.class.getSimpleName();
     public MainActivityFragment() {
     }
 
@@ -59,8 +72,44 @@ public class MainActivityFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String searchPreference = preferences.getString(getString(R.string.preferences_search_type_key),
                 getString(R.string.preferences_search_type_value_popular_movies));
-        FetchMoviesTask moviesTask = new FetchMoviesTask(movieAdapter);
-        boolean popularMoviesPreference = searchPreference.equals(getString(R.string.preferences_search_type_value_popular_movies));
-        moviesTask.execute(popularMoviesPreference);
+        boolean popularMovies = searchPreference.equals(getString(R.string.preferences_search_type_value_popular_movies));
+
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create();
+
+        String moviesApiBaseUrl = "http://api.themoviedb.org/3/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(moviesApiBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        IMoviesService moviesService = retrofit.create(IMoviesService.class);
+
+        Call<MoviesSerializer> call;
+        //Put the API in the gradle global properties in the user's home directory under the .gradle folder and the gradle.properties file, if the file doesn't exist, then create it.
+        if(popularMovies){
+            call = moviesService.getMovies("popular", BuildConfig.THE_MOVIE_DB_API_KEY);
+        }
+        else{
+            call = moviesService.getMovies("top_rated", BuildConfig.THE_MOVIE_DB_API_KEY);
+        }
+        call.enqueue(this);
+    }
+
+    @Override
+    public void onResponse(Call<MoviesSerializer> call, Response<MoviesSerializer> response) {
+        MoviesSerializer movieSerializer = response.body();
+        if(movieSerializer != null && movieSerializer.getMovies() != null){
+            movieAdapter.clear();
+            movieAdapter.addAll(movieSerializer.getMovies());
+        }
+    }
+
+    @Override
+    public void onFailure(Call<MoviesSerializer> call, Throwable t) {
+        Toast.makeText(getActivity(), "Erro ao carregar os filmes.", Toast.LENGTH_LONG).show();
+        Log.e(LOG_TAG, t.getMessage(), t);
     }
 }
