@@ -23,8 +23,7 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Gets the Movie object from the ArrayAdapter in the position given
-        Movie movie = getItem(position);
+        ViewHolder viewHolder;
 
         //The Adapter recycle views to AdapterViews.
         //If this is a new View object then we inflate the layout, if not,
@@ -34,11 +33,29 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
         //https://github.com/udacity/android-custom-arrayadapter/blob/master/app/src/main/java/demo/example/com/customarrayadapter/AndroidFlavorAdapter.java
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_movies, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.posterImageView = (ImageView) convertView.findViewById(R.id.grid_item_movies_imageview);
+
+            //store the holder with the ImageView
+            convertView.setTag(viewHolder);
+        }
+        else{
+            //this way I avoid using findViewById every time the getView method is called
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView poster = (ImageView) convertView.findViewById(R.id.grid_item_movies_imageview);
-        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + movie.getPosterPath()).into(poster);
+        //Gets the Movie object from the ArrayAdapter in the position given
+        Movie movie = getItem(position);
+
+        //get the posterImageView from the ViewHolder and fill it with Picasso
+        if(movie != null)
+            Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + movie.getPosterPath()).into(viewHolder.posterImageView);
 
         return convertView;
+    }
+
+    private static class ViewHolder{
+        ImageView posterImageView;
     }
 }
