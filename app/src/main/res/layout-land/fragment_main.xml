@@ -6,13 +6,17 @@
              app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
              tools:context=".MainActivityFragment">
 
-    <GridView
-        android:id="@+id/gridview_main_fragment"
+    <!--<GridView-->
+        <!--android:id="@+id/gridview_main_fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:numColumns="3"-->
+        <!--android:verticalSpacing="0dp"-->
+        <!--android:horizontalSpacing="0dp"-->
+        <!--android:stretchMode="columnWidth">-->
+    <!--</GridView>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_main_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="3"
-        android:verticalSpacing="0dp"
-        android:horizontalSpacing="0dp"
-        android:stretchMode="columnWidth">
-    </GridView>
+        android:layout_height="match_parent"/>
 </FrameLayout>
